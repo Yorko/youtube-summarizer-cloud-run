@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. -->
 
-# YouTube Summarizer on Cloud Run
+# Gemini YouTube Summarizer on Cloud Run
 
-This project provides a simple web application, built with Fast API and deployed on Google Cloud Run, that summarizes YouTube videos using Google's Generative AI models.
+Gemini is pretty good with YouTube analysis. Let's build and deploy a web application that summarizes YouTube videos using Google's Gemini and deploy it with Google Cloud Run.
 
 ![](img/youtube_summarizer_interface.png)
+
+_This tutorial is a modernized version of the code lab [Build a YouTube Summarizer Codelab](https://codelabs.developers.google.com/devsite/codelabs/build-youtube-summarizer)._
 
 ## Description
 
@@ -91,17 +93,17 @@ The project includes a script to automate the build and deployment process.
     ```
     This command deploys the container image built in the previous step, configuring the service account, minimum instances, memory, and allowing unauthenticated access by default. The script will output the URL of your deployed Cloud Run service. Visit this URL to test your deployed YouTube Summarizer!
 1. In case your organization doesn't allow unauthenticated access, you can proxy the service to localhost:
- ```bash
-   gcloud run services proxy ${SERVICE_NAME}
+    ```bash
+    gcloud run services proxy ${SERVICE_NAME}
     ```
-Just like with locally run application, this will open the app at [https://localhost:8080](https://localhost:8080/).
 
+Just like with locally run application, this will open the app at [https://localhost:8080](https://localhost:8080/).
 
 
 ## Bonus Challenges (Optional):
 
 * Explore the `scripts/enable_oauth_for_cloud_run.sh` script. Understand how it sets up a Load Balancer and Identity-Aware Proxy (IAP) to restrict access to authenticated users. Try implementing it for your service;
-* Modernaize the app: use `cloudbuild.yaml` to specify different Docker files for frontend and backend services;
+* Modernaize the app: split front & back into different services and use `cloudbuild.yaml` to specify different Docker files for them;
 * Experiment with prompting.
 
 Good luck hacking!
