@@ -1,3 +1,17 @@
+<!-- # Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. -->
+
 # YouTube Summarizer on Cloud Run
 
 This project provides a simple web application, built with Fast API and deployed on Google Cloud Run, that summarizes YouTube videos using Google's Generative AI models.
@@ -26,14 +40,14 @@ The application presents a web interface where users can input a YouTube video l
 
 ## Installation & Setup
 
-1. Install `uv` – the modern Python dependency manager: 
+1. Install `uv` – the modern Python dependency manager:
 
     ```bash
     pip install uv
     ```
 
 2. Create a virtual env:
-    
+
     ```bash
     uv venv
     ```
@@ -69,13 +83,13 @@ The project includes a script to automate the build and deployment process.
 1.  Review and modify `build_n_deploy.sh`:** Update `PROJECT_ID`, `PROJECT_NUMBER`, `SERVICE_NAME`, `DEPLOY_REGION`, and `SERVICE_ACCOUNT` variables as needed for your environment.
 1.  Build the container image using Google Cloud Build:
     ```bash
-    ./build_n_deploy.sh build
+    make build_cloud_image
     ```
 1.  Deploy the service to Cloud Run:
     ```bash
-    ./build_n_deploy.sh deploy
+    make deploy_cloud_run_service
     ```
-    This command deploys the container image built in the previous step, configuring the service account, minimum instances, memory, and allowing unauthenticated access by default. The script will output the URL of your deployed Cloud Run service. Visit this URL to test your deployed YouTube Summarizer! 
+    This command deploys the container image built in the previous step, configuring the service account, minimum instances, memory, and allowing unauthenticated access by default. The script will output the URL of your deployed Cloud Run service. Visit this URL to test your deployed YouTube Summarizer!
 1. In case your organization doesn't allow unauthenticated access, you can proxy the service to localhost:
  ```bash
    gcloud run services proxy ${SERVICE_NAME}
@@ -87,7 +101,7 @@ Just like with locally run application, this will open the app at [https://local
 ## Bonus Challenges (Optional):
 
 * Explore the `scripts/enable_oauth_for_cloud_run.sh` script. Understand how it sets up a Load Balancer and Identity-Aware Proxy (IAP) to restrict access to authenticated users. Try implementing it for your service;
-* Modernaize the app: use `cloudbuild.yaml` to specify different Docker files for frontend and backend;
+* Modernaize the app: use `cloudbuild.yaml` to specify different Docker files for frontend and backend services;
 * Experiment with prompting.
 
 Good luck hacking!

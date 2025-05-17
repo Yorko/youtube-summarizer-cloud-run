@@ -1,3 +1,17 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # Use a specific, stable Python version
 FROM python:3.13-slim-bookworm
 
@@ -25,9 +39,9 @@ WORKDIR $APP_HOME
 RUN uv venv
 
 # Copy ONLY the dependency definition files first to leverage Docker layer caching
-COPY pyproject.toml . 
-COPY .python-version .  
-COPY uv.lock .      
+COPY pyproject.toml .
+COPY .python-version .
+COPY uv.lock .
 
 # Install dependencies into the virtual environment using uv
 RUN uv sync
@@ -43,7 +57,7 @@ COPY ./youtube_summarizer_cloud_run ./youtube_summarizer_cloud_run
 
 # Expose ports
 # As there are 2 services running in one container (not the best practice)
-# we won't be using the default CLoud Run oport 8080 
+# we won't be using the default CLoud Run oport 8080
 ENV BACKEND_PORT=8081
 ENV STREAMLIT_PORT=8501
 EXPOSE ${BACKEND_PORT:-8081}

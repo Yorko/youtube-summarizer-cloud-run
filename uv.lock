@@ -1068,7 +1068,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115.12" },
     { name = "google-genai", specifier = ">=1.2.0" },
     { name = "python-multipart", specifier = ">=0.0.20" },
-    { name = "requests", specifier = ">=2.31.0" },
+    { name = "requests", specifier = ">=2.32.3" },
     { name = "streamlit", specifier = ">=1.45.1" },
     { name = "uvicorn", specifier = ">=0.34.2" },
 ]
