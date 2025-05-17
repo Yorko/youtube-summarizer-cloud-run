@@ -3,7 +3,7 @@ import requests # Added for making HTTP requests
 import json # Added for parsing potential JSON error responses
 
 # --- Configuration ---
-BACKEND_URL = "http://0.0.0.0:8080"  # URL of your running Fast API application
+BACKEND_URL = "http://localhost:8081"  # URL of your running Fast API application
 
 # --- Helper Functions ---
 

@@ -41,14 +41,13 @@ COPY ./youtube_summarizer_cloud_run ./youtube_summarizer_cloud_run
 
 # --- Runtime Configuration ---
 
-# Expose the ports your applications listen on.
-# FastAPI will listen on PORT (default 8080 for Cloud Run).
-# Streamlit will listen on a different port (e.g., 8501).
-# Cloud Run will only route external traffic to the port specified by the PORT env variable.
-ENV PORT=8080
+# Expose ports
+# As there are 2 services running in one container (not the best practice)
+# we won't be using the default CLoud Run oport 8080 
+ENV BACKEND_PORT=8081
 ENV STREAMLIT_PORT=8501
-EXPOSE ${PORT:-8080}
+EXPOSE ${BACKEND_PORT:-8081}
 EXPOSE ${STREAMLIT_PORT:-8501}
 
 # Start both FastAPI and Streamlit.
-CMD ["sh", "-c", "uv run python youtube_summarizer_cloud_run/fast_api_backend.py --host 0.0.0.0 --port $PORT & uv run python -m streamlit run youtube_summarizer_cloud_run/streamlit_frontend.py --server.address 0.0.0.0 --server.port $STREAMLIT_PORT"]
+CMD ["sh", "-c", "uv run python -m uvicorn youtube_summarizer_cloud_run.fast_api_backend:app --host 0.0.0.0 --port $BACKEND_PORT --reload & uv run python -m streamlit run youtube_summarizer_cloud_run/streamlit_frontend.py --server.address 0.0.0.0 --server.port $STREAMLIT_PORT"]

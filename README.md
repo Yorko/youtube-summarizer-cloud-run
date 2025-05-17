@@ -53,11 +53,11 @@ The application presents a web interface where users can input a YouTube video l
 
 1. Run the Fast API backend:
     ```bash
-    uv run python youtube_summarizer_cloud_run/fast_api_backend.py
+    make run_backend
     ```
 1. Run the Streamlit frontend:
     ```bash
-    uv run python -m streamlit run youtube_summarizer_cloud_run/streamlit_frontend.py
+    make run_frontend
     ```
 1.  Access the application in your web browser: `http://localhost:8501`
 1.  Enter a YouTube video link, optionally add a prompt, and click "Summarize".
