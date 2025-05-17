@@ -1,93 +1,93 @@
-# youtube-summarizer-cloud-run
+# YouTube Summarizer on Cloud Run
 
+This project provides a simple web application, built with Fast API and deployed on Google Cloud Run, that summarizes YouTube videos using Google's Generative AI models.
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/google-cloud-ce/communities/genai-fsa/emea/experimental/users/kashnitsky/youtube-summarizer-cloud-run.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/google-cloud-ce/communities/genai-fsa/emea/experimental/users/kashnitsky/youtube-summarizer-cloud-run/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+![](img/youtube_summarizer_interface.png)
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+The application presents a web interface where users can input a YouTube video link, select a generative AI model (currently defaults to Gemini 2.0 Flash), and optionally add a specific prompt for the summarization task. Upon submission, the backend Fast API application uses the Google GenAI client library to interact with the chosen model, sending the video content and prompt to generate a text summary. The summary is then displayed to the user.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Features
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+* Summarizes YouTube videos using Google Gemini Flash model;
+* Simple web interface for inputting video links and prompts;
+* Built with Python and Fast API;
+* Designed for deployment on Google Cloud Run;
+* Includes a script for building the container image and deploying to Cloud Run.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Prerequisites
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+* Python 3.x;
+* Google Cloud SDK (`gcloud`) installed and configured;
+* A Google Cloud Project with billing enabled;
+* Required APIs enabled in your Google Cloud Project (Cloud Build, Cloud Run, IAM, Vertex AI, etc. - refer to deployment scripts for specifics);
+* Docker (for local building if not using Cloud Build).
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Installation & Setup
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+1. Install `uv` – the modern Python dependency manager: 
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+    ```bash
+    pip install uv
+    ```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+2. Create a virtual env:
+    
+    ```bash
+    uv venv
+    ```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+3.  Install Python dependencies with `uv`
 
-## License
-For open source projects, say how it is licensed.
+    ```bash
+    uv sync
+    ```
+    This will install Fast API, requests, and google-genai listed in the `pyproject.toml` file.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+4.  Configure Google Cloud:
+    * Set your project ID: `gcloud config set project YOUR_PROJECT_ID`
+    * Ensure your user account or service account has the necessary permissions (e.g., Cloud Run Admin, Cloud Build Editor, Service Account User, Vertex AI User).
+
+## Local usage
+
+1. Run the Fast API backend:
+    ```bash
+    uv run python youtube_summarizer_cloud_run/fast_api_backend.py
+    ```
+1. Run the Streamlit frontend:
+    ```bash
+    uv run python -m streamlit run youtube_summarizer_cloud_run/streamlit_frontend.py
+    ```
+1.  Access the application in your web browser: `http://localhost:8501`
+1.  Enter a YouTube video link, optionally add a prompt, and click "Summarize".
+
+## Deployment to Google Cloud Run
+
+The project includes a script to automate the build and deployment process.
+
+1.  Review and modify `build_n_deploy.sh`:** Update `PROJECT_ID`, `PROJECT_NUMBER`, `SERVICE_NAME`, `DEPLOY_REGION`, and `SERVICE_ACCOUNT` variables as needed for your environment.
+1.  Build the container image using Google Cloud Build:
+    ```bash
+    ./build_n_deploy.sh build
+    ```
+1.  Deploy the service to Cloud Run:
+    ```bash
+    ./build_n_deploy.sh deploy
+    ```
+    This command deploys the container image built in the previous step, configuring the service account, minimum instances, memory, and allowing unauthenticated access by default. The script will output the URL of your deployed Cloud Run service. Visit this URL to test your deployed YouTube Summarizer! 
+1. In case your organization doesn't allow unauthenticated access, you can proxy the service to localhost:
+ ```bash
+   gcloud run services proxy ${SERVICE_NAME}
+    ```
+Just like with locally run application, this will open the app at [https://localhost:8080](https://localhost:8080/).
+
+
+
+## Bonus Challenges (Optional):
+
+* Explore the `scripts/enable_oauth_for_cloud_run.sh` script. Understand how it sets up a Load Balancer and Identity-Aware Proxy (IAP) to restrict access to authenticated users. Try implementing it for your service;
+* Modernaize the app: use `cloudbuild.yaml` to specify different Docker files for frontend and backend;
+* Experiment with prompting.
+
+Good luck hacking!
