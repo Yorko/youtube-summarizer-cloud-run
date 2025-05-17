@@ -71,12 +71,12 @@ The application presents a web interface where users can input a YouTube video l
     ```bash
     make run_backend
     ```
-1. Run the Streamlit frontend:
+1. Run the Streamlit frontend (in a different terminal tab/window):
     ```bash
     make run_frontend
     ```
 1.  Access the application in your web browser: `http://localhost:8501`
-1.  Enter a YouTube video link, optionally add a prompt, and click "Summarize".
+1.  Enter a YouTube video link (e.g. this one https://youtu.be/jCTvblRXnzg on AlphaEvolve by DeepMind), optionally add a prompt, and click "Generate Summary".
 
 ## Deployment to Google Cloud Run
 
