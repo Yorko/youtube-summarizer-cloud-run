@@ -14,6 +14,8 @@
 
 # Gemini YouTube Summarizer on Cloud Run
 
+**[Blog post](https://yorko.github.io/2025/youtube-summarizer-cloud-run/)**
+
 Gemini is pretty good with YouTube analysis. Let's build and deploy a web application that summarizes YouTube videos using Google's Gemini and deploy it with Google Cloud Run.
 
 ![](img/youtube_summarizer_interface.png)
